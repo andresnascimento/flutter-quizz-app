@@ -1,11 +1,13 @@
 // import 'dart:html';
 
 import 'package:flutter/material.dart';
-import 'quiz_brain.dart';
-import 'page_question.dart';
+import 'package:random_quiz_app/page_home.dart';
+// import 'quiz_brain.dart';
 
-QuizBrain quizBrain =
-    QuizBrain(); // this creates a new object from the class QuizBrain
+// QuizBrain quizBrain = QuizBrain();
+
+// QuizList quizList =
+//     QuizList(); // this creates a new object from the class QuizBrain
 
 void main() {
   runApp(MyApp());
@@ -17,14 +19,13 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
+        backgroundColor: Color.fromRGBO(0, 0, 241, 1),
         appBar: AppBar(
           title: Text('Cool Quiz'),
           backgroundColor: Color.fromRGBO(0, 0, 241, 1),
         ),
-        body: QuizPage(),
+        body: QuizList(),
       ),
     );
   }
 }
-
-
