@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'quiz_brain.dart';
+import 'category_card.dart';
 
 QuizBrain quizBrain =
     QuizBrain();
@@ -51,8 +52,8 @@ class _QuizPageState extends State<QuizPage> {
               decoration: BoxDecoration(
                 color: Colors.white,
                 borderRadius: BorderRadius.only(
-                  topLeft: const Radius.circular(16),
-                  topRight: const Radius.circular(16),
+                  topLeft: const Radius.circular(defaultBorderRadius),
+                  topRight: const Radius.circular(defaultBorderRadius),
                 )
               ),
             ),
@@ -96,106 +97,95 @@ class _QuizPageState extends State<QuizPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Stack(
-      overflow: Overflow.visible,
-      alignment: Alignment.topCenter,
-      children: <Widget>[
-        Container(
-          height: 200,
-          color: Color.fromRGBO(0, 0, 241, 1),
-        ),
-        Padding(
-          padding: const EdgeInsets.all(20.0),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: <Widget>[
-                Container(
-                  margin: EdgeInsets.only(top: 64),
-                  height: 400,
-                  decoration: new BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.only(
-                      topLeft: Radius.circular(16.0),
-                      topRight: Radius.circular(16.0),
-                      bottomLeft: Radius.circular(16.0),
-                      bottomRight: Radius.circular(16.0),
+    return Material(
+      color: Colors.grey[100],
+      child: Stack(
+        overflow: Overflow.visible,
+        alignment: Alignment.topCenter,
+        children: <Widget>[
+          Container(
+            height: 200,
+            color: Color.fromRGBO(0, 0, 241, 1),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(20.0),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: <Widget>[
+                  Container(
+                    margin: EdgeInsets.only(top: 64),
+                    height: 400,
+                    decoration: new BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(defaultBorderRadius),
+                      boxShadow: [defaultBoxShadow],
                     ),
-                    boxShadow: [//background color of box
-                      BoxShadow(
-                        color: Color.fromRGBO(19, 25, 159, .2),
-                        blurRadius: 24.0, // soften the shadow
-                        spreadRadius: 0.0, //extend the shadow
-                        offset: Offset(
-                          0.0, // Move to right 10  horizontally
-                          6.0, // Move to bottom 10 Vertically
+                    child: Padding(
+                      padding: const EdgeInsets.all(20.0),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                            quizBrain.getQuestionText(),
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                              fontSize: 24,
+                              height: 1.4,
+                              color: Colors.black,
+                              fontWeight: FontWeight.w800,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                  Column(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    children: <Widget>[
+                      Container(
+                        padding: EdgeInsets.all(16),
+                        child: RaisedButton(
+                          elevation: 0,
+                          padding: EdgeInsets.symmetric(vertical: 16.0, horizontal: 24.0),
+                          color: Color.fromRGBO(249, 207, 48, 1),
+                          // textColor: Colors.white,
+                          child: Text('👍 True', style: TextStyle(fontSize: 20)),
+                          onPressed: () {
+                            bool userPickedAnswer = true;
+                            checkAnswer(userPickedAnswer);
+                            print(quizScore);
+                          },
                         ),
-                      )
+                      ),
+                      Container(
+                        padding: EdgeInsets.all(16),
+                        child: RaisedButton(
+                          elevation: 0,
+                          padding: EdgeInsets.symmetric(vertical: 16.0, horizontal: 24.0),
+                          color: Color.fromRGBO(3, 4, 19, 1),
+                          textColor: Colors.white,
+                          child: Text('👎 False',style: TextStyle(fontSize: 20)),
+                          onPressed: () {
+                            bool userPickedAnswer = false;
+                            checkAnswer(userPickedAnswer);
+                          },
+                        ),
+                      ),
                     ],
                   ),
-                  child: Padding(
-                    padding: const EdgeInsets.all(20.0),
-                    child: Column(
+                  Container(
+                    height: 100,
+                    child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text(
-                          quizBrain.getQuestionText(),
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                            fontSize: 24,
-                            height: 1.4,
-                            color: Color.fromRGBO(26, 24, 89, 1)
-                          ),
-                        ),
-                      ],
+                      children: scoreIcons,
                     ),
-                  ),
-                ),
-                Column(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
-                  children: <Widget>[
-                    Container(
-                      padding: EdgeInsets.all(16),
-                      child: RaisedButton(
-                        elevation: 0,
-                        padding: EdgeInsets.symmetric(vertical: 16.0, horizontal: 24.0),
-                        color: Color.fromRGBO(249, 207, 48, 1),
-                        // textColor: Colors.white,
-                        child: Text('👍 True', style: TextStyle(fontSize: 20)),
-                        onPressed: () {
-                          bool userPickedAnswer = true;
-                          checkAnswer(userPickedAnswer);
-                          print(quizScore);
-                        },
-                      ),
-                    ),
-                    Container(
-                      padding: EdgeInsets.all(16),
-                      child: RaisedButton(
-                        elevation: 0,
-                        padding: EdgeInsets.symmetric(vertical: 16.0, horizontal: 24.0),
-                        color: Color.fromRGBO(3, 4, 19, 1),
-                        textColor: Colors.white,
-                        child: Text('👎 False',style: TextStyle(fontSize: 20)),
-                        onPressed: () {
-                          bool userPickedAnswer = false;
-                          checkAnswer(userPickedAnswer);
-                        },
-                      ),
-                    ),
-                  ],
-                ),
-                Container(
-                  height: 100,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: scoreIcons,
-                  ),
-                )
-              ],
+                  )
+                ],
+              ),
             ),
-          ),
-      ],
+        ],
+      ),
     );
   }
 }

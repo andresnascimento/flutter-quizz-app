@@ -2,13 +2,12 @@
 
 import 'package:flutter/material.dart';
 import 'package:random_quiz_app/page_home.dart';
-import 'quiz_brain.dart';
-import 'page_question.dart';
+// import 'quiz_brain.dart';
 
-QuizBrain quizBrain = QuizBrain();
+// QuizBrain quizBrain = QuizBrain();
 
-QuizList quizList =
-    QuizList(); // this creates a new object from the class QuizBrain
+// QuizList quizList =
+//     QuizList(); // this creates a new object from the class QuizBrain
 
 void main() {
   runApp(MyApp());
